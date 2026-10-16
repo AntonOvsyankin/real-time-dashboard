@@ -1,0 +1,34 @@
+<section class="status-panel" aria-labelledby="producer-status-heading">
+  <h2 id="producer-status-heading" class="visually-hidden">Producer status</h2>
+
+  <div class="status-panel__live" role="status" aria-live="polite">
+    <span class="badge" [attr.data-state]="state()">{{ stateLabel() }}</span>
+    <span class="run">
+      @if (runId() > 0) {
+        Run #{{ runId() }}
+      } @else {
+        No run yet
+      }
+    </span>
+    <span class="settings">
+      {{ settings().instrumentCount }} instrument{{ settings().instrumentCount === 1 ? '' : 's' }} ·
+      {{ settings().updatesPerBatch }} updates/batch · {{ settings().batchIntervalMs }} ms interval
+    </span>
+    <span class="rate">≈ {{ nominalRate() }} updates/s across all instruments</span>
+  </div>
+
+  <p class="total">
+    Total updates this run: <strong class="numeric">{{ totalUpdates() | volume }}</strong>
+  </p>
+
+  @if (isError()) {
+    <div class="error" role="alert">
+      <p class="error__message">{{ errorMessage() ?? 'Unknown error' }}</p>
+      @if (state() === 'run-error') {
+        <p><a routerLink="/settings">Apply settings to start a new run.</a></p>
+      } @else {
+        <button type="button" class="retry" (click)="retry.emit()">Retry</button>
+      }
+    </div>
+  }
+</section>

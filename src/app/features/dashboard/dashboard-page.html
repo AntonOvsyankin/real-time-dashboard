@@ -1,0 +1,23 @@
+<div class="dashboard-header">
+  <h2>Dashboard</h2>
+  <button
+    type="button"
+    class="pause-button"
+    [disabled]="!producer.canControl()"
+    [attr.aria-pressed]="isPaused()"
+    (click)="togglePause()"
+  >
+    {{ isPaused() ? 'Resume' : 'Pause' }}
+  </button>
+</div>
+
+<app-producer-status-panel
+  [state]="producer.state()"
+  [runId]="producer.runId()"
+  [settings]="producer.settings()"
+  [totalUpdates]="producer.totalUpdates()"
+  [errorMessage]="producer.errorMessage()"
+  (retry)="producer.retry()"
+/>
+
+<app-metrics-table [rows]="producer.metrics()" />

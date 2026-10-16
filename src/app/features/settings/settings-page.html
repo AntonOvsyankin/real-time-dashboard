@@ -1,0 +1,49 @@
+<h2>Settings</h2>
+
+<form class="settings-form" (submit)="apply($event)" novalidate>
+  @for (f of fields; track f.name) {
+    @let invalidShown = showErrors(f.field);
+    <div class="field" [class.field--invalid]="invalidShown">
+      <label [for]="f.name + '-input'">{{ f.label }}</label>
+      <input
+        [id]="f.name + '-input'"
+        type="number"
+        inputmode="numeric"
+        step="1"
+        [formField]="f.field"
+        [attr.aria-invalid]="invalidShown"
+        [attr.aria-describedby]="f.name + '-hint' + (invalidShown ? ' ' + f.name + '-errors' : '')"
+      />
+      <span class="hint" [id]="f.name + '-hint'">{{ f.hint }}</span>
+      @if (invalidShown) {
+        <ul class="errors" [id]="f.name + '-errors'">
+          @for (error of f.field().errors(); track error.kind) {
+            <li>{{ errorText(error) }}</li>
+          }
+        </ul>
+      }
+    </div>
+  }
+
+  <p class="rate">
+    @if (nominalRate(); as rate) {
+      Nominal rate: ≈ {{ rate }} updates/s across all instruments
+    } @else {
+      Nominal rate: enter valid values to see the rate
+    }
+  </p>
+
+  <p class="note">
+    Changes take effect only when you click Apply. Applying starts a new run and clears current
+    values.
+  </p>
+
+  <div class="actions">
+    <button type="submit" class="apply-button" [disabled]="!canSubmit()">Apply</button>
+    @if (settingsForm().dirty()) {
+      <span class="unapplied">Unapplied changes</span>
+    }
+  </div>
+
+  <p class="applied" role="status" aria-live="polite">{{ appliedMessage() }}</p>
+</form>

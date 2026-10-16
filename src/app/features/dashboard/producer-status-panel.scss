@@ -1,0 +1,78 @@
+.status-panel {
+  background: #fff;
+  border: 1px solid #d8dee6;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+.status-panel__live {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #e6eaf0;
+  color: #3a4656;
+
+  &[data-state='running'] {
+    background: #dcf3e5;
+    color: #11703a;
+  }
+
+  &[data-state='paused'] {
+    background: #fff3cd;
+    color: #7a5a00;
+  }
+
+  &[data-state='run-error'],
+  &[data-state='init-error'] {
+    background: #fde2e1;
+    color: #b3261e;
+  }
+}
+
+.run {
+  font-weight: 600;
+}
+
+.settings,
+.rate {
+  color: #5a6676;
+}
+
+.total {
+  margin: 0.5rem 0 0;
+}
+
+.error {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid #b3261e;
+  background: #fdf1f0;
+
+  p {
+    margin: 0.25rem 0;
+  }
+}
+
+.error__message {
+  font-weight: 600;
+  color: #8c1d18;
+}
+
+.retry {
+  margin-top: 0.25rem;
+  padding: 0.35rem 1rem;
+  border: 1px solid #b3261e;
+  border-radius: 4px;
+  background: #fff;
+  color: #b3261e;
+  cursor: pointer;
+}

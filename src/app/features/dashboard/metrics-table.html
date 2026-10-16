@@ -1,0 +1,58 @@
+<div class="table-scroll">
+  <table class="metrics-table">
+    <caption>
+      Live metrics per instrument
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Instrument</th>
+        <th scope="col" class="num">Last price</th>
+        <th scope="col" class="num">Bid–ask spread</th>
+        <th scope="col" class="num">Volume</th>
+        <th scope="col" class="num">VWAP</th>
+        <th scope="col" class="num">Imbalance</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.symbol) {
+        <tr>
+          <th scope="row">{{ row.symbol }}</th>
+          <td class="num">
+            @if (row.lastPriceCents === null) {
+              <span aria-label="unavailable">—</span>
+            } @else {
+              {{ row.lastPriceCents | cents }}
+            }
+          </td>
+          <td class="num">
+            @if (row.spreadCents === null) {
+              <span aria-label="unavailable">—</span>
+            } @else {
+              {{ row.spreadCents | cents }}
+            }
+          </td>
+          <td class="num">{{ row.volume | volume }}</td>
+          <td class="num">
+            @if (row.vwapCents === null) {
+              <span aria-label="unavailable">—</span>
+            } @else {
+              {{ row.vwapCents | cents }}
+            }
+          </td>
+          @let imbalanceText = row.imbalance | signedRatio;
+          <td
+            class="num"
+            [class.positive]="imbalanceText.startsWith('+')"
+            [class.negative]="imbalanceText.startsWith('-')"
+          >
+            @if (row.imbalance === null) {
+              <span aria-label="unavailable">—</span>
+            } @else {
+              {{ imbalanceText }}
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

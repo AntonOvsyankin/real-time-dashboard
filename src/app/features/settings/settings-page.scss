@@ -1,0 +1,86 @@
+.settings-form {
+  max-width: 32rem;
+  background: #fff;
+  border: 1px solid #d8dee6;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+
+  label {
+    font-weight: 600;
+  }
+
+  input {
+    max-width: 12rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #b8c2cf;
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.field--invalid input {
+  border-color: #b3261e;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #5a6676;
+}
+
+.errors {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  color: #b3261e;
+}
+
+.rate,
+.note {
+  color: #3a4656;
+}
+
+.note {
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.apply-button {
+  padding: 0.45rem 1.4rem;
+  border: 1px solid #1f6feb;
+  border-radius: 4px;
+  background: #1f6feb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:disabled {
+    border-color: #b8c2cf;
+    background: #e6eaf0;
+    color: #6b7684;
+    cursor: not-allowed;
+  }
+}
+
+.unapplied {
+  font-size: 0.9rem;
+  color: #7a5a00;
+}
+
+.applied {
+  min-height: 1.5em;
+  margin: 0.75rem 0 0;
+  color: #11703a;
+}
